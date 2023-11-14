@@ -1,0 +1,23 @@
+
+.logo {
+    padding: 10% 0 1% 0;
+    font-size: 2em;
+}
+
+.centered {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+.text {
+    font-size: small;
+    padding-top: 10%;
+    color: #757575;
+    text-decoration: none;
+}
+
+a:link, a:visited, a:hover, a:active {
+    text-decoration: none;
+    color: #757575;
+}

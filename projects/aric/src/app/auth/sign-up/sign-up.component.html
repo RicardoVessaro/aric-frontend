@@ -1,0 +1,63 @@
+<div class="centered logo">
+    Aric_
+</div>
+<div class="centered">
+    <form (ngSubmit)="onSubmit()" #f="ngForm">
+        <mat-form-field>
+            <mat-label>Username</mat-label>
+            <input matInput
+                type="text"
+                id="username"
+                ngModel
+                name="username"
+            >
+        </mat-form-field>
+        <br>
+        <mat-form-field>
+            <mat-label>Name</mat-label>
+            <input matInput
+                type="text"
+                id="name"
+                ngModel
+                name="name"
+            >
+        </mat-form-field>
+        <br>
+        <mat-form-field>
+            <mat-label>E-Mail</mat-label>
+            <input matInput
+                type="email"
+                id="email"
+                ngModel
+                name="email"
+            >
+        </mat-form-field>
+        <br>
+        <mat-form-field>
+            <mat-label>Password</mat-label>
+            <input matInput
+                type="text"
+                id="password"
+                ngModel
+                name="password"
+            >
+        </mat-form-field>
+        <br>
+        <mat-form-field>
+            <mat-label>Confirm Password</mat-label>
+            <input matInput
+                type="text"
+                id="confirmPassword"
+                ngModel
+                name="confirmPassword"
+            >
+        </mat-form-field>
+        <br>
+        <div class="centered">
+            <button mat-flat-button color="primary" type="submit">Register</button>
+        </div>
+        <div class="text">
+            <a href="#">Already a member? Login.</a>
+        </div>
+    </form>
+</div>    

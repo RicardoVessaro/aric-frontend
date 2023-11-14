@@ -25,6 +25,7 @@
               "projects/aric/src/assets"
             ],
             "styles": [
+              "projects/aric/src/custom-theme.scss",
               "projects/aric/src/styles.css"
             ],
             "scripts": []
