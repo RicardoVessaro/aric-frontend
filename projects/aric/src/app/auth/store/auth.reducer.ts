@@ -18,8 +18,8 @@ export const authReducer = createReducer(
    on(signUp, state => {
         return {...state, logging: true}
    }),
-   on(success, (state, action) => {
-        return { member: action, logging: false}
+   on(success, state => {
+        return { member: state.member, logging: false}
    })
 );
 
