@@ -49,13 +49,7 @@
             "development": {
               "optimization": false,
               "extractLicenses": false,
-              "sourceMap": true,
-              "fileReplacements": [
-                {
-                  "replace": "projects/aric/src/environments/environment.ts",
-                  "with": "projects/aric/src/environments/environment.development.ts"
-                }
-              ]
+              "sourceMap": true
             }
           },
           "defaultConfiguration": "production"
@@ -64,12 +58,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "aric:build:production",
-              "proxyConfig": "projects/aric/src/proxy.conf.json"
+              "buildTarget": "aric:build:production"
             },
             "development": {
-              "buildTarget": "aric:build:development",
-              "proxyConfig": "projects/aric/src/proxy.conf.dev.json"
+              "buildTarget": "aric:build:development"
             }
           },
           "defaultConfiguration": "development"
