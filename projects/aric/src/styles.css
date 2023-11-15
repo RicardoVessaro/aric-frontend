@@ -5,5 +5,5 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .error-snackbar {
     color: #ffffff;
-    --mdc-snackbar-container-color: #FF1744
+    --mdc-snackbar-container-color: #FF1744 /* Red A400 */
 }

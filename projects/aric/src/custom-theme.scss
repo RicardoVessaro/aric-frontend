@@ -16,7 +16,7 @@ $aric-primary: mat.define-palette(mat.$gray-palette, 900);
 $aric-accent: mat.define-palette(mat.$gray-palette);
 
 // The warn palette is optional (defaults to red).
-$aric-warn: mat.define-palette(mat.$red-palette);
+$aric-warn: mat.define-palette(mat.$red-palette, A400);
 
 // Create the theme object. A theme consists of configurations for individual
 // theming systems such as "color" or "typography".

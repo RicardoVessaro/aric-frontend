@@ -1,15 +1,16 @@
-<div class="centered logo">
+<div class="centered-logo">
     Aric_
 </div>
 <div class="centered">
-    <form (ngSubmit)="onSubmit()" #f="ngForm">
+    <form class="signup-form" [formGroup]="signupForm" (ngSubmit)="onSubmit()">
         <mat-form-field>
             <mat-label>Username</mat-label>
             <input matInput
                 type="text"
                 id="username"
                 ngModel
-                name="username"
+                formControlName="username"
+                required
             >
         </mat-form-field>
         <br>
@@ -19,45 +20,106 @@
                 type="text"
                 id="name"
                 ngModel
-                name="name"
+                formControlName="name"
+                required
             >
         </mat-form-field>
         <br>
         <mat-form-field>
-            <mat-label>E-Mail</mat-label>
+            <mat-label>Email</mat-label>
             <input matInput
                 type="email"
                 id="email"
                 ngModel
-                name="email"
+                formControlName="email"
+                required
             >
         </mat-form-field>
         <br>
         <mat-form-field>
             <mat-label>Password</mat-label>
             <input matInput
-                type="text"
+                [type]="hidePassword? 'password' : 'text'"
                 id="password"
                 ngModel
-                name="password"
+                formControlName="password"
+                required
             >
+            <button
+                mat-icon-button 
+                matSuffix 
+                (click)="hidePassword = !hidePassword" 
+                [attr.aria-label]="'Hide password'" 
+                [attr.aria-pressed]="hidePassword"
+                type="button"
+            >
+                <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
         </mat-form-field>
         <br>
         <mat-form-field>
             <mat-label>Confirm Password</mat-label>
             <input matInput
-                type="text"
+                [type]="hideConfirmPassword? 'password' : 'text'"
                 id="confirmPassword"
                 ngModel
-                name="confirmPassword"
+                formControlName="confirmPassword"
+                required
             >
+            <button
+                mat-icon-button 
+                matSuffix 
+                (click)="hideConfirmPassword = !hideConfirmPassword" 
+                [attr.aria-label]="'Hide password'" 
+                [attr.aria-pressed]="hideConfirmPassword"
+                type="button"
+            >
+                <mat-icon>{{hideConfirmPassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
         </mat-form-field>
         <br>
         <div class="centered">
-            <button mat-flat-button color="primary" type="submit">Sign Up</button>
+            <button 
+                mat-flat-button 
+                color="primary" 
+                type="submit"
+                [disabled]="!signupForm.valid"
+            >Sign Up</button>
         </div>
         <div class="text">
             <a href="#">Already a member? Sign in.</a>
         </div>
     </form>
 </div>    
+<div class="error-text">
+    <mat-error *ngIf="formHasError('username', 'required')">
+        Username is required.
+    </mat-error>
+    <mat-error *ngIf="formHasError('name', 'required')">
+        Name is required.
+    </mat-error>
+    <mat-error *ngIf="formHasError('email', 'required')">
+        Email is required.
+    </mat-error>
+    <mat-error *ngIf="formHasError('email', 'email') && !formHasError('email', 'required')">
+        Email is not valid.
+    </mat-error>
+    <mat-error *ngIf="formHasError('password', 'required')">
+        Password is required.
+    </mat-error>
+    <mat-error *ngIf="formHasError('password', 'lowercase') && !formHasError('password', 'required')">
+        Password must have at least 1 lowercase letter.
+    </mat-error>
+    <mat-error *ngIf="formHasError('password', 'uppercase') && !formHasError('password', 'required')">
+        Password must have at least 1 uppercase letter.
+    </mat-error>
+    <mat-error *ngIf="formHasError('password', 'number') && !formHasError('password', 'required')">
+        Password must have at least 1 number.
+    </mat-error>
+    <mat-error *ngIf="formHasError('password', 'specialCharacter') && !formHasError('password', 'required')">
+        Password must have at least 1 special character.
+    </mat-error>
+    <mat-error *ngIf="formHasError('confirmPassword', 'passwordsMustMatch')">
+        Passwords must match.
+    </mat-error>
+</div>
