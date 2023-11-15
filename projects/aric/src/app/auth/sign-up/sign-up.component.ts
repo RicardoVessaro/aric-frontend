@@ -25,12 +25,11 @@ import { signUp } from '../store/auth.actions';
   styleUrl: './sign-up.component.css'
 })
 export class SignUpComponent {
+  @ViewChild('f') signupForm!: NgForm;
 
   constructor(
     private store: Store
   ) {}
-
-  @ViewChild('f') signupForm!: NgForm;
 
   onSubmit() {
     console.log('onSubmit');

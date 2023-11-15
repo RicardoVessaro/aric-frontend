@@ -13,7 +13,8 @@ export class ErrorEffects {
         ofType(error),
         tap(() => {
             this.snackbar.openFromComponent(ErrorComponent, {
-                duration: this.durationInSeconds * 1000
+                duration: this.durationInSeconds * 1000,
+                panelClass: ['error-snackbar']
             });
         })
     ), {dispatch: false});
