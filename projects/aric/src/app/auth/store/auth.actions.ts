@@ -11,7 +11,20 @@ export const signUp = createAction(
     }>()
 );
 
+export const signIn = createAction(
+    '[Auth] signIn' ,
+    props<{
+        username: string,
+        password: string
+    }>()
+)
+
 export const success = createAction(
     '[Auth] success',
     props<Member>()
+)
+
+export const error = createAction(
+    '[Auth] error',
+    props<{message: string}>()
 )

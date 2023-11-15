@@ -1,12 +1,12 @@
 import { Injectable } from "@angular/core";
 import { createEffect, ofType } from "@ngrx/effects";
 import { Actions } from "@ngrx/effects";
-import { signUp, success } from "./auth.actions";
+import { error, signIn, signUp, success } from "./auth.actions";
 import { catchError, map, of, switchMap, tap } from "rxjs";
 import { HttpClient } from "@angular/common/http";
 import { Member } from "../../shared/member.model";
 import { Router } from "@angular/router";
-import { error } from "../../error/store/error.action";
+import * as errorAction from "../../error/store/error.action";
 
 interface AuthResponse {
     userId: string,
@@ -39,19 +39,46 @@ export class AuthEffects {
                     return this.handleAuthentication(response);
                 }),
                 catchError(err => {
-                    console.log('bbbbbbbbbbbbbbbb');
                     return this.handleError(err);
                 })
             )
         }
-    )))
+    )));
+
+    authSignin = createEffect(() => this.actions$.pipe(
+        ofType(signIn),
+        switchMap(params => {
+            return this.http.post<AuthResponse>(
+                this.AUTH_URL + '/authenticate',
+                {
+                    username: params.username,
+                    password: params.password
+                }
+            )
+            .pipe(
+                map(response => {
+                    return this.handleAuthentication(response);
+                }),
+                catchError(err => {
+                    return this.handleError(err);
+                })
+            )
+        })
+    ));
 
     authSucces = createEffect(() => this.actions$.pipe(
         ofType(success),
-        tap((params) => {
+        tap(() => {
             this.router.navigate(['/']);
         })
-    ), {dispatch: false})
+    ), {dispatch: false});
+
+    authError = createEffect(() => this.actions$.pipe(
+        ofType(error),
+        switchMap((err) => {
+            return of(errorAction.error(err))
+        })
+    ))
 
     handleAuthentication(response: AuthResponse) {
         const expirationDate = new Date(new Date().getTime() + response.expiresIn);

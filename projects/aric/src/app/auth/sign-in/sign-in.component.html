@@ -1,0 +1,54 @@
+<div class="centered-logo">
+    Aric_
+</div>
+<div class="centered">
+    <form [formGroup]="signinForm" (ngSubmit)="onSubmit()">
+        <mat-form-field>
+            <mat-label>Username</mat-label>
+            <input matInput
+                type="text"
+                id="username"
+                formControlName="username"
+                required
+            >
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Password</mat-label>
+            <input matInput
+                [type]="hidePassword? 'password' : 'text'"
+                id="password"
+                formControlName="password"
+                required
+            >
+            <button
+                mat-icon-button 
+                matSuffix 
+                (click)="hidePassword = !hidePassword" 
+                [attr.aria-label]="'Hide password'" 
+                [attr.aria-pressed]="hidePassword"
+                type="button"
+            >
+                <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+        </mat-form-field>
+        <div class="centered">
+            <button 
+                mat-flat-button 
+                color="primary" 
+                type="submit"
+                [disabled]="!signinForm.valid"
+            >Sign In</button>
+        </div>
+        <div class="text">
+            <a routerLink="/signup">Not a member? Sign Up.</a>
+        </div>
+    </form>
+</div>
+<div class="error-text">
+    <mat-error *ngIf="formHasError('username', 'required')">
+        Username is required.
+    </mat-error>
+    <mat-error *ngIf="formHasError('password', 'required')">
+        Password is required.
+    </mat-error>
+</div>

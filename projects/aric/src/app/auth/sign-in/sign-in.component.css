@@ -1,0 +1,43 @@
+
+.centered-logo {
+    padding: 10% 0 1% 0;
+    font-size: 2em;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+.centered {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+.text {
+    font-size: small;
+    padding-top: 10%;
+    color: #757575;
+    text-decoration: none;
+}
+
+.error-text {
+    padding-top: 1%;
+    font-size: small;
+    align-items: center;
+    justify-content: center;
+    display: grid;
+}
+
+a:link, a:visited, a:hover, a:active {
+    text-decoration: none;
+    color: #757575;
+}
+
+form { 
+    max-width: 250px;
+    width: 100%;
+}
+
+mat-form-field {
+    width: 100%;
+}
