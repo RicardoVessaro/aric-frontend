@@ -9,6 +9,7 @@ import * as fromApp from './store/app.reducer';
 import { provideEffects } from '@ngrx/effects';
 import { AuthEffects } from './auth/store/auth.effects';
 import { HttpClientModule, provideHttpClient } from '@angular/common/http';
+import { ErrorEffects } from './error/store/error.effects';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -17,7 +18,8 @@ export const appConfig: ApplicationConfig = {
     {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'outline'}},
     provideStore(fromApp.appReducer),
     provideEffects([
-      AuthEffects
+      AuthEffects,
+      ErrorEffects
     ]),
     provideHttpClient()
   ]

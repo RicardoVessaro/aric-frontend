@@ -5,6 +5,8 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { FormsModule, NgForm } from '@angular/forms';
 import { Store } from '@ngrx/store';
+import {MatSnackBar, MatSnackBarModule} from '@angular/material/snack-bar';
+
 import { signUp } from '../store/auth.actions';
 
 
@@ -16,7 +18,8 @@ import { signUp } from '../store/auth.actions';
     MatInputModule,
     MatCardModule,
     MatButtonModule,
-    FormsModule
+    FormsModule,
+    MatSnackBarModule
   ],
   templateUrl: './sign-up.component.html',
   styleUrl: './sign-up.component.css'
