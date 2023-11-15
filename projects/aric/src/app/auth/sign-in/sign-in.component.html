@@ -33,11 +33,17 @@
         </mat-form-field>
         <div class="centered">
             <button 
+                *ngIf="!(logging$ | async)" 
                 mat-flat-button 
                 color="primary" 
                 type="submit"
                 [disabled]="!signinForm.valid"
             >Sign In</button>
+
+            <mat-spinner 
+                style="width: 35px; height: 35px;"
+                *ngIf="(logging$ | async)"
+            ></mat-spinner>
         </div>
         <div class="text">
             <a routerLink="/signup">Not a member? Sign Up.</a>
