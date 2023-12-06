@@ -1,7 +1,8 @@
 
 import { createReducer, on } from "@ngrx/store"
 import { Member } from "../../shared/member.model";
-import { success, signUp, signIn, error } from "./auth.actions";
+import { success, signUp, signIn, error, logout, logoutSuccess } from "./auth.actions";
+import { state } from "@angular/animations";
 
 export interface State {
     member: Member;
@@ -21,8 +22,18 @@ export const authReducer = createReducer(
    on(signIn, state => {
     return {...state, logging: true}
    }),
+   on(logout, state => {
+        return { ...state, member: null as any}
+   }),
    on(success, (state, action) => {
-        return { member: action, logging: false}
+        const member = new Member(
+            action.username, 
+            action.id, 
+            action.token as string, 
+            action.expirationDate
+        );
+
+        return { ...state, member: member, logging: false};
    }),
    on(error, (state, action) => {
     return {...state, logging: false}

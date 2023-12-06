@@ -1,12 +1,15 @@
 import { Injectable } from "@angular/core";
 import { createEffect, ofType } from "@ngrx/effects";
 import { Actions } from "@ngrx/effects";
-import { error, signIn, signUp, success } from "./auth.actions";
-import { catchError, map, of, switchMap, tap } from "rxjs";
-import { HttpClient } from "@angular/common/http";
+import { error, logout, logoutSuccess, signIn, signUp, success } from "./auth.actions";
+import { Observable, catchError, map, of, switchMap, take, tap } from "rxjs";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Member } from "../../shared/member.model";
 import { Router } from "@angular/router";
 import * as errorAction from "../../error/store/error.action";
+import { Store } from "@ngrx/store";
+import { selectToken } from "./auth.selectors";
+import { State } from "./auth.reducer";
 
 interface AuthResponse {
     userId: string,
@@ -66,10 +69,36 @@ export class AuthEffects {
         })
     ));
 
+    authLogout = createEffect(() => this.actions$.pipe (
+        ofType(logout),
+        tap(() => {
+                const member = JSON.parse(localStorage.getItem('member') as string);
+
+                const token = member._token;
+
+                this.http.get(
+                    this.AUTH_URL + '/logout',
+                    {
+                        'headers': new HttpHeaders({'Authorization': 'Bearer ' + token})
+                    }
+                )
+                .pipe(
+                    tap(() => {
+                        localStorage.removeItem('member');
+                        this.router.navigate(['/']);
+                    }),  
+                    catchError(err => {
+                        return this.handleError(err);
+                    }),
+                    take(1)
+                ).subscribe();
+        })
+    ), {dispatch: false});
+
     authSucces = createEffect(() => this.actions$.pipe(
         ofType(success),
         tap(() => {
-            this.router.navigate(['/']);
+            this.router.navigate(['/profile']);
         })
     ), {dispatch: false});
 
@@ -99,6 +128,7 @@ export class AuthEffects {
     constructor(
         private actions$: Actions,
         private http: HttpClient,
-        private router: Router
+        private router: Router,
+        private store: Store<{auth: State}>
     ) {}
 }

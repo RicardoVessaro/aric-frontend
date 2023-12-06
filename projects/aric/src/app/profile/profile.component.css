@@ -1,0 +1,17 @@
+
+.main-grid {
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+}
+
+.profile-header {
+    padding: 3% 5% 3% 0;
+}
+
+.profile-image {
+    border-radius: 100%;
+    width: 70px;
+    height: 70px;
+    border-color: #212121; /* Grey 900 */
+    border: 2px solid;
+}

@@ -19,6 +19,14 @@ export const signIn = createAction(
     }>()
 )
 
+export const logout = createAction(
+    '[Auth] logout'
+)
+
+export const logoutSuccess = createAction(
+    '[Auth] logoutSuccess'
+)
+
 export const success = createAction(
     '[Auth] success',
     props<Member>()

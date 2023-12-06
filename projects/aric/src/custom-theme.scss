@@ -13,7 +13,7 @@
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
 $aric-primary: mat.define-palette(mat.$gray-palette, 900);
-$aric-accent: mat.define-palette(mat.$gray-palette);
+$aric-accent: mat.define-palette(mat.$gray-palette, 300);
 
 // The warn palette is optional (defaults to red).
 $aric-warn: mat.define-palette(mat.$red-palette, A400);
