@@ -90,7 +90,7 @@ export class AuthEffects {
     authSucces = createEffect(() => this.actions$.pipe(
         ofType(success),
         tap(() => {
-            this.router.navigate(['/profile']);
+            this.router.navigate(['/feed']);
         })
     ), {dispatch: false});
 

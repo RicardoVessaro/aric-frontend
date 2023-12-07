@@ -3,6 +3,8 @@ import { HomeComponent } from './home/home.component';
 import { SignUpComponent } from './auth/sign-up/sign-up.component';
 import { SignInComponent } from './auth/sign-in/sign-in.component';
 import { ProfileComponent } from './profile/profile.component';
+import { authGuard } from './auth/auth.guard';
+import { FeedComponent } from './feed/feed.component';
 
 export const routes: Routes = [
     {   path: '', redirectTo: '/home', pathMatch: 'full'  },
@@ -11,15 +13,23 @@ export const routes: Routes = [
     },
     {
         path: 'signup',
-        component: SignUpComponent
+        component: SignUpComponent,
+        canActivate: [authGuard]
     },
     {
         path: 'signin',
-        component: SignInComponent
+        component: SignInComponent,
+        canActivate: [authGuard]
     },
     {
         path: 'profile',
-        component: ProfileComponent
+        component: ProfileComponent,
+        canActivate: [authGuard]
+    },
+    {
+        path: 'feed',
+        component: FeedComponent,
+        canActivate: [authGuard]
     },
     {   path: '**', redirectTo: '/home', pathMatch: 'full' },
 ];
