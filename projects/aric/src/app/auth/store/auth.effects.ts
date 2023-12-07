@@ -1,14 +1,13 @@
 import { Injectable } from "@angular/core";
 import { createEffect, ofType } from "@ngrx/effects";
 import { Actions } from "@ngrx/effects";
-import { error, logout, logoutSuccess, signIn, signUp, success } from "./auth.actions";
-import { Observable, catchError, map, of, switchMap, take, tap } from "rxjs";
-import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { error, logout, signIn, signUp, success } from "./auth.actions";
+import { catchError, map, of, switchMap, take, tap } from "rxjs";
+import { HttpClient } from "@angular/common/http";
 import { Member } from "../../shared/member.model";
 import { Router } from "@angular/router";
 import * as errorAction from "../../error/store/error.action";
 import { Store } from "@ngrx/store";
-import { selectToken } from "./auth.selectors";
 import { State } from "./auth.reducer";
 
 interface AuthResponse {
@@ -72,15 +71,8 @@ export class AuthEffects {
     authLogout = createEffect(() => this.actions$.pipe (
         ofType(logout),
         tap(() => {
-                const member = JSON.parse(localStorage.getItem('member') as string);
-
-                const token = member._token;
-
                 this.http.get(
-                    this.AUTH_URL + '/logout',
-                    {
-                        'headers': new HttpHeaders({'Authorization': 'Bearer ' + token})
-                    }
+                    this.AUTH_URL + '/logout'
                 )
                 .pipe(
                     tap(() => {

@@ -8,8 +8,9 @@ import { provideStore } from '@ngrx/store';
 import * as fromApp from './store/app.reducer';
 import { provideEffects } from '@ngrx/effects';
 import { AuthEffects } from './auth/store/auth.effects';
-import { HttpClientModule, provideHttpClient } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptors, withRequestsMadeViaParent } from '@angular/common/http';
 import { ErrorEffects } from './error/store/error.effects';
+import { authInterceptor } from './auth/auth.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -21,6 +22,8 @@ export const appConfig: ApplicationConfig = {
       AuthEffects,
       ErrorEffects
     ]),
-    provideHttpClient()
+    provideHttpClient(
+      withInterceptors([authInterceptor])
+    ),
   ]
 };
